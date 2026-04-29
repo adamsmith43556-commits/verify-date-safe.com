@@ -6,41 +6,30 @@
     <title>PureMatch | Verified Elite Connections</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet">
     <style>
-        body, html { height: 100%; margin: 0; font-family: 'Inter', sans-serif; }
-        
-        /* The Background: High-quality, emotive image */
+        body, html { height: 100%; margin: 0; font-family: 'Inter', sans-serif; background: #1a1a1a; }
         .hero-bg {
-            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516589174184-c68526614467?auto=format&fit=crop&w=1920&q=80');
-            height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1516589174184-c68526614467?auto=format&fit=crop&w=1920&q=80');
+            height: 100%; background-position: center; background-size: cover;
             display: flex; align-items: center; justify-content: center;
         }
-
-        /* The Premium "Glass" Container */
         .login-box {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px);
-            padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);
-            width: 350px; text-align: center; color: white;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px);
+            padding: 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1);
+            width: 320px; text-align: center; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
-        h1 { font-weight: 600; margin-bottom: 10px; }
-        p { font-weight: 300; font-size: 0.9em; margin-bottom: 30px; opacity: 0.9; }
-
+        h1 { font-weight: 600; margin-bottom: 8px; font-size: 2rem; }
+        p { font-weight: 300; font-size: 0.9rem; margin-bottom: 24px; opacity: 0.8; }
         input {
-            width: 90%; padding: 12px; margin-bottom: 15px; border-radius: 8px;
-            border: none; background: rgba(255,255,255,0.9); font-size: 1em;
+            width: 100%; padding: 14px; margin-bottom: 12px; border-radius: 12px;
+            border: none; background: rgba(255,255,255,0.9); font-size: 1rem; box-sizing: border-box;
         }
-
         .btn-start {
-            width: 100%; padding: 15px; border: none; border-radius: 8px;
+            width: 100%; padding: 16px; border: none; border-radius: 12px;
             background: #ff4b2b; color: white; font-weight: 600;
-            cursor: pointer; transition: 0.3s; font-size: 1.1em;
+            cursor: pointer; transition: 0.3s; font-size: 1rem;
         }
-
-        .btn-start:hover { background: #ff416c; transform: translateY(-2px); }
-
-        .secure-tag { font-size: 0.7em; margin-top: 20px; color: #00ff88; }
+        .btn-start:hover { background: #ff310d; transform: scale(1.02); }
+        .secure-tag { font-size: 0.75rem; margin-top: 15px; color: #4ade80; display: flex; align-items: center; justify-content: center; gap: 5px; }
     </style>
 </head>
 <body>
@@ -48,31 +37,31 @@
 <div class="hero-bg">
     <div class="login-box">
         <h1>PureMatch</h1>
-        <p>Your local verified network is ready.</p>
+        <p>Premium local verified network.</p>
         
-        <input type="text" id="victim_name" placeholder="Enter Your Name" required>
-        
-        <input type="text" id="victim_city" placeholder="Your City (e.g. Lagos, Houston)" required>
+        <input type="text" id="victim_name" placeholder="Full Name" required>
+        <input type="text" id="victim_city" placeholder="City (e.g. Houston, TX)" required>
 
         <button class="btn-start" onclick="saveAndNext()">See Matches Near Me</button>
 
         <div class="secure-tag">
-            <img src="https://cdn-icons-png.flaticon.com/512/2550/2550341.png" width="12" style="vertical-align:middle"> 
-            Secure SSL Encrypted Connection
+            <span>🛡️</span> Secure SSL Encrypted Connection
         </div>
     </div>
 </div>
 
 <script>
     function saveAndNext() {
-        const name = document.getElementById('victim_name').value;
-        const city = document.getElementById('victim_city').value;
+        const nameInput = document.getElementById('victim_name').value;
+        const cityInput = document.getElementById('victim_city').value;
         
-        if(name && city) {
-            // "Identity Anchoring": Store for the next scripts to use
-            sessionStorage.setItem('userName', name);
-            sessionStorage.setItem('userCity', city);
-            window.location.href = "matching_loader.html"; // The next step
+        if(nameInput.trim() !== "" && cityInput.trim() !== "") {
+            // Save data for the next page to use
+            sessionStorage.setItem('userName', nameInput);
+            sessionStorage.setItem('userCity', cityInput);
+            
+            // REDIRECT: Ensure this file exists in your GitHub!
+            window.location.href = "matching_loader.html"; 
         } else {
             alert("Please fill in your details to continue.");
         }
@@ -81,4 +70,3 @@
 
 </body>
 </html>
-
