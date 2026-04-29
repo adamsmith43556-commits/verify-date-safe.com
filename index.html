@@ -6,22 +6,22 @@
     <title>PureMatch | Verified Elite Connections</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet">
     <style>
-        body, html { height: 100%; margin: 0; font-family: 'Inter', sans-serif; background: #1a1a1a; }
+        body, html { height: 100%; margin: 0; font-family: 'Inter', sans-serif; background: #1a1a1a; color: white; }
         .hero-bg {
-            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1516589174184-c68526614467?auto=format&fit=crop&w=1920&q=80');
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1516589174184-c68526614467?auto=format&fit=crop&w=1920&q=80');
             height: 100%; background-position: center; background-size: cover;
             display: flex; align-items: center; justify-content: center;
         }
         .login-box {
             background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px);
             padding: 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1);
-            width: 320px; text-align: center; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 320px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        h1 { font-weight: 600; margin-bottom: 8px; font-size: 2rem; }
+        h1 { font-weight: 600; margin-bottom: 8px; font-size: 2.2rem; letter-spacing: -1px; }
         p { font-weight: 300; font-size: 0.9rem; margin-bottom: 24px; opacity: 0.8; }
         input {
             width: 100%; padding: 14px; margin-bottom: 12px; border-radius: 12px;
-            border: none; background: rgba(255,255,255,0.9); font-size: 1rem; box-sizing: border-box;
+            border: none; background: rgba(255,255,255,0.9); font-size: 1rem; color: #333; box-sizing: border-box;
         }
         .btn-start {
             width: 100%; padding: 16px; border: none; border-radius: 12px;
@@ -37,33 +37,34 @@
 <div class="hero-bg">
     <div class="login-box">
         <h1>PureMatch</h1>
-        <p>Premium local verified network.</p>
+        <p>Join the elite local network.</p>
         
-        <input type="text" id="victim_name" placeholder="Full Name" required>
+        <input type="text" id="victim_name" placeholder="Your Name" required>
         <input type="text" id="victim_city" placeholder="City (e.g. Houston, TX)" required>
 
         <button class="btn-start" onclick="saveAndNext()">See Matches Near Me</button>
 
         <div class="secure-tag">
-            <span>🛡️</span> Secure SSL Encrypted Connection
+            <span>🛡️</span> 256-bit SSL Secure Verification
         </div>
     </div>
 </div>
 
 <script>
     function saveAndNext() {
-        const nameInput = document.getElementById('victim_name').value;
-        const cityInput = document.getElementById('victim_city').value;
+        // 1. Capture what the user typed
+        const nameVal = document.getElementById('victim_name').value;
+        const cityVal = document.getElementById('victim_city').value;
         
-        if(nameInput.trim() !== "" && cityInput.trim() !== "") {
-            // Save data for the next page to use
-            sessionStorage.setItem('userName', nameInput);
-            sessionStorage.setItem('userCity', cityInput);
+        if(nameVal.trim() !== "" && cityVal.trim() !== "") {
+            // 2. Store it so the next page knows who you are
+            sessionStorage.setItem('userName', nameVal);
+            sessionStorage.setItem('userCity', cityVal);
             
-            // REDIRECT: Ensure this file exists in your GitHub!
+            // 3. MOVE TO THE LOADER PAGE
             window.location.href = "matching_loader.html"; 
         } else {
-            alert("Please fill in your details to continue.");
+            alert("Please enter your name and city to continue.");
         }
     }
 </script>
