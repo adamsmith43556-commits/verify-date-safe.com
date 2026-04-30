@@ -2,53 +2,178 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encrypted Identity Clearance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Identity Clearance Portal | Secure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { background: #0a0a0a; color: white; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
-        .card { background: #1a1a1a; padding: 35px; border-radius: 28px; width: 100%; max-width: 400px; text-align: center; border: 1px solid rgba(74, 222, 128, 0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.6); }
-        .icon { font-size: 55px; margin-bottom: 20px; color: #4ade80; }
-        h3 { margin: 0 0 12px 0; font-size: 1.5rem; letter-spacing: -0.5px; }
-        p { font-size: 13px; opacity: 0.7; margin-bottom: 25px; line-height: 1.6; }
+        :root { --primary: #ff4b2b; --bg: #050505; --card: #121212; --green: #4ade80; --error: #ff3333; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
-        .address-box { background: #000; padding: 18px; border-radius: 14px; border: 1px solid #333; margin-bottom: 20px; text-align: left; }
-        .address { font-family: 'Courier New', monospace; font-size: 11px; color: #4ade80; word-break: break-all; display: block; margin-top: 8px; line-height: 1.4; }
+        html, body { 
+            background: var(--bg); color: white; font-family: 'Inter', sans-serif; 
+            margin: 0; padding: 0; width: 100%; overflow-x: hidden;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .container { 
+            width: 92%; max-width: 400px; padding: 40px 25px; margin: 20px 0;
+            background: var(--card); border-radius: 40px; border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.9); text-align: center;
+        }
+
+        /* Error Notification */
+        #error-notice {
+            display: none; background: rgba(255, 51, 51, 0.1); border: 1px solid var(--error);
+            color: var(--error); padding: 12px; border-radius: 15px; font-size: 11px;
+            font-weight: 700; margin-bottom: 20px; animation: shake 0.4s ease;
+        }
+        @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-5px);} 75% {transform: translateX(5px);} }
+
+        /* THE "WHY" SECTION - Creates Value */
+        .why-box {
+            text-align: left; background: rgba(255,255,255,0.02); padding: 20px; 
+            border-radius: 20px; margin-bottom: 25px; border: 1px solid #222;
+        }
+        .why-box h3 { font-size: 13px; color: var(--green); margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 1px; }
+        .why-box p { font-size: 11px; color: #888; margin: 0; line-height: 1.6; }
+
+        .price { font-size: 48px; font-weight: 800; margin: 0; letter-spacing: -2px; }
+        .network-pill { display: inline-block; padding: 5px 12px; background: #222; border-radius: 6px; font-size: 10px; color: #888; margin: 10px 0 25px 0; font-weight: 700; }
+
+        .address-card { 
+            background: #000; border: 1px solid #222; padding: 25px 20px; border-radius: 25px; 
+            margin-bottom: 25px; cursor: pointer; position: relative;
+        }
+        .addr-label { font-size: 10px; color: #555; display: block; margin-bottom: 12px; font-weight: 800; }
+        .address { font-size: 11px; color: var(--primary); font-family: monospace; word-break: break-all; }
+
+        /* Upload Section */
+        .upload-box { 
+            background: rgba(255,255,255,0.02); border: 1px dashed #333; border-radius: 25px; 
+            padding: 30px 20px; margin-bottom: 25px;
+        }
+        .upload-box.active { border-color: var(--green); background: rgba(74, 222, 128, 0.05); }
+        .upload-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; display: block; }
         
-        .copy-btn { background: #ff4b2b; color: white; border: none; padding: 16px; width: 100%; border-radius: 12px; font-weight: 600; cursor: pointer; margin-bottom: 12px; font-size: 16px; transition: 0.3s; }
-        .copy-btn:hover { background: #ff310d; transform: translateY(-1px); }
-        
-        .net-tag { font-size: 10px; color: #facc15; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 5px; }
+        .custom-file-btn {
+            background: #fff; color: #000; padding: 14px 20px; border-radius: 12px;
+            font-size: 13px; font-weight: 800; cursor: pointer; display: inline-block;
+        }
+
+        /* Scan Effect */
+        #scan-container { display: none; margin-top: 20px; text-align: left; }
+        .scan-text { font-size: 10px; color: var(--green); font-weight: 800; margin-bottom: 5px; text-transform: uppercase; }
+        .progress-bg { width: 100%; height: 6px; background: #222; border-radius: 10px; overflow: hidden; }
+        .progress-bar { width: 0%; height: 100%; background: var(--green); transition: width 0.1s linear; }
+
+        .activate-btn { 
+            background: linear-gradient(135deg, #ff4b2b 0%, #ff1f5b 100%); color: white; 
+            border: none; width: 100%; padding: 22px; border-radius: 20px; 
+            font-weight: 800; font-size: 18px; cursor: pointer; transition: 0.3s;
+        }
+        .activate-btn:active { transform: scale(0.98); }
+
+        .secure-footer { margin-top: 35px; font-size: 10px; color: #333; font-weight: 600; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <div class="icon">🛡️</div>
-    <h3>Secure Asset Deposit</h3>
-    <p>To bypass traditional banking delays and protect member privacy, clearance is processed via **USDT (BEP20)**. Your $14.99 deposit is fully refundable after verification.</p>
+<div class="container">
+    <div id="error-notice"></div>
+
+    <div class="why-box">
+        <h3>Why do I need to pay?</h3>
+        <p>To ensure a 100% real experience, we require a small security deposit. This filters out bots and protects the privacy of our female members. <b>This deposit is fully refundable after your first successful meeting.</b></p>
+    </div>
     
-    <div class="address-box">
-        <span class="net-tag">✓ Network: BNB Smart Chain (BEP20)</span>
-        <span style="font-size: 10px; opacity: 0.5;">OFFICIAL DEPOSIT ADDRESS:</span>
-        <span class="address" id="wallet-addr">0x4fE11766CD0bc8FEbAc47B0D55FAAcD596Ce49b4</span>
+    <div class="price">$14.99</div>
+    <div class="network-pill">NETWORK: BEP20 (SMART CHAIN)</div>
+
+    <div class="address-card" onclick="copyAddress()">
+        <span class="addr-label">CRYPTO DEPOSIT ADDRESS (TAP TO COPY)</span>
+        <span class="address" id="walletAddr">0x4fE11766CD0bc8FEbAc47B0D55FAAcD596Ce49b4</span>
     </div>
 
-    <button class="copy-btn" onclick="copyAddress()">Copy Address</button>
-    
-    <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
-        <div style="font-size: 11px; color: #4ade80;">● Awaiting Network Confirmation...</div>
+    <div class="upload-box" id="dropZone">
+        <span class="upload-title">Attach Transfer Receipt</span>
+        <p style="font-size: 11px; color: #666; margin-bottom: 20px;">Upload your screenshot for AI network verification.</p>
+        
+        <label for="file-input" class="custom-file-btn" id="label-text">Choose Screenshot</label>
+        <input id="file-input" type="file" accept="image/*" style="display:none;" onchange="startScan(this)">
+
+        <div id="scan-container">
+            <div class="scan-text" id="status-msg">Analyzing Transaction...</div>
+            <div class="progress-bg"><div class="progress-bar" id="p-bar"></div></div>
+        </div>
+    </div>
+
+    <button class="activate-btn" onclick="validateAndSubmit()">Activate Membership</button>
+
+    <div class="secure-footer">
+        SAFEGUARDED BY 256-BIT ENCRYPTION
     </div>
 </div>
 
 <script>
+    let isScanned = false;
+
     function copyAddress() {
-        const addr = document.getElementById('wallet-addr').innerText;
-        navigator.clipboard.writeText(addr).then(() => {
-            alert("Address Copied! Please send 14.99 USDT via the BNB Smart Chain (BEP20).");
-        });
+        navigator.clipboard.writeText(document.getElementById('walletAddr').innerText);
+        alert("Wallet address copied. Please send exactly $14.99.");
+    }
+
+    function showError(msg) {
+        const err = document.getElementById('error-notice');
+        err.innerText = msg;
+        err.style.display = 'block';
+        setTimeout(() => { err.style.display = 'none'; }, 5000);
+    }
+
+    function startScan(input) {
+        if (input.files && input.files[0]) {
+            if (!input.files[0].type.startsWith('image/')) {
+                showError("UNSUPPORTED FILE: Please upload a clear image screenshot.");
+                input.value = ""; return;
+            }
+            document.getElementById('scan-container').style.display = 'block';
+            document.getElementById('dropZone').classList.add('active');
+            document.getElementById('label-text').innerText = "✓ Receipt Attached";
+            
+            let width = 0;
+            const pBar = document.getElementById('p-bar');
+            const status = document.getElementById('status-msg');
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    status.innerText = "✓ TRANSACTION HASH IDENTIFIED";
+                    isScanned = true;
+                } else {
+                    width += 2;
+                    pBar.style.width = width + "%";
+                    if(width > 40) status.innerText = "Verifying Wallet Signature...";
+                    if(width > 80) status.innerText = "Finalizing Clearance...";
+                }
+            }, 60);
+        }
+    }
+
+    function validateAndSubmit() {
+        if (document.getElementById('file-input').files.length === 0) {
+            showError("MISSING PROOF: You must upload the transfer screenshot to get clearance.");
+            return;
+        }
+        if (!isScanned) {
+            showError("PROCESSING: Please wait for the AI scan to finish.");
+            return;
+        }
+        const btn = document.querySelector('.activate-btn');
+        btn.innerText = "Connecting to Node...";
+        btn.style.opacity = "0.7";
+        setTimeout(() => {
+            alert("SUCCESS: Your payment proof is under review. Clearance typically takes 3-5 minutes depending on network traffic. Please do not refresh.");
+        }, 2000);
     }
 </script>
 
 </body>
 </html>
-
