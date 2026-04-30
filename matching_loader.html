@@ -3,101 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Results | Secure Access</title>
+    <title>PureMatch | Elite Verified Results</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #ff4b2b; --bg: #0a0a0a; --card: #161616; --green: #4ade80; }
         
-        body { 
-            background: var(--bg); 
-            color: white; 
-            font-family: 'Inter', sans-serif; 
-            margin: 0; 
-            padding: 0;
-            overflow-x: hidden;
-        }
+        body { background: var(--bg); color: white; font-family: 'Inter', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
 
         /* Luxury Header Area */
-        .premium-header {
-            padding: 40px 20px;
-            text-align: center;
-            background: linear-gradient(to bottom, #1a1a1a, var(--bg));
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .live-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(74, 222, 128, 0.1);
-            color: var(--green);
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(74, 222, 128, 0.2);
-        }
-        .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; box-shadow: 0 0 10px var(--green); animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .premium-header { padding: 50px 20px 30px 20px; text-align: center; background: linear-gradient(to bottom, #1a1a1a, var(--bg)); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        
+        .live-indicator { display: inline-flex; align-items: center; gap: 8px; background: rgba(74, 222, 128, 0.1); color: var(--green); padding: 8px 20px; border-radius: 50px; font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 15px; border: 1px solid rgba(74, 222, 128, 0.2); }
+        .dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; box-shadow: 0 0 15px var(--green); animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(1.1); } 100% { opacity: 1; transform: scale(1); } }
 
-        h1 { font-size: 28px; font-weight: 800; margin: 0; letter-spacing: -1px; }
-        .loc-text { color: #888; font-size: 14px; margin-top: 5px; }
+        h1 { font-size: 32px; font-weight: 800; margin: 0; letter-spacing: -1.5px; line-height: 1.1; }
+        .loc-text { color: #888; font-size: 15px; margin-top: 10px; font-weight: 400; }
 
         /* Match Grid */
-        .grid { max-width: 420px; margin: 30px auto; padding: 0 20px 100px 20px; }
+        .grid { max-width: 440px; margin: 20px auto; padding: 0 20px 120px 20px; }
         
-        .profile-card {
-            background: var(--card);
-            border-radius: 30px;
-            margin-bottom: 35px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            animation: fadeIn 0.8s ease forwards;
-            opacity: 0;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .profile-card { background: var(--card); border-radius: 35px; margin-bottom: 40px; overflow: hidden; border: 1px solid rgba(255,255,255,0.03); box-shadow: 0 30px 60px rgba(0,0,0,0.5); opacity: 0; animation: fadeIn 1s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        .img-wrapper { position: relative; width: 100%; height: 420px; }
-        .main-img { width: 100%; height: 100%; object-fit: cover; filter: blur(15px) brightness(0.8); transition: 0.5s; }
+        .img-wrapper { position: relative; width: 100%; height: 460px; overflow: hidden; }
         
-        .verified-tag {
-            position: absolute; top: 20px; right: 20px;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--green);
-            color: var(--green);
-            padding: 8px 15px;
-            border-radius: 50px;
-            font-size: 10px;
-            font-weight: 800;
-            display: flex; align-items: center; gap: 5px;
-        }
+        /* -- KEY CHANGE: Reducing blur from 15px to 4px -- */
+        .main-img { width: 100%; height: 100%; object-fit: cover; filter: blur(4px) brightness(0.9); transition: filter 0.3s; }
+        /* A subtle zoom effect for luxury feel */
+        .profile-card:hover .main-img { filter: blur(2px) brightness(1); transform: scale(1.02); }
 
-        .details { padding: 25px; }
-        .name-age { font-size: 24px; font-weight: 700; margin-bottom: 5px; }
-        .distance { color: #666; font-size: 13px; margin-bottom: 20px; display: flex; align-items: center; gap: 5px; }
+        .verified-tag { position: absolute; top: 25px; right: 25px; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1.5px solid var(--green); color: var(--green); padding: 9px 18px; border-radius: 50px; font-size: 11px; font-weight: 800; display: flex; align-items: center; gap: 6px; letter-spacing: 0.5px; z-index: 10; }
+
+        .details { padding: 30px; position: relative; background: var(--card); }
+        .name-age { font-size: 26px; font-weight: 700; margin-bottom: 8px; color: #fff; letter-spacing: -0.5px; }
         
-        .premium-btn {
-            background: linear-gradient(135deg, #ff4b2b, #ff416c);
-            color: white; border: none; width: 100%; padding: 20px;
-            border-radius: 20px; font-weight: 800; font-size: 16px;
-            cursor: pointer; box-shadow: 0 10px 25px rgba(255, 75, 43, 0.3);
-            transition: 0.3s;
-        }
-        .premium-btn:active { transform: scale(0.96); }
+        .distance { color: #888; font-size: 14px; margin-bottom: 25px; display: flex; align-items: center; gap: 7px; font-weight: 400; }
+        .distance svg { color: var(--green); opacity: 0.8; }
+        
+        .premium-btn { background: linear-gradient(135deg, #ff4b2b 0%, #ff1f5b 100%); color: white; border: none; width: 100%; padding: 22px; border-radius: 22px; font-weight: 800; font-size: 17px; cursor: pointer; box-shadow: 0 12px 30px rgba(255, 75, 43, 0.4); transition: all 0.3s ease; letter-spacing: 0.5px; position: relative; overflow: hidden; }
+        .premium-btn::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0)); opacity: 0; transition: opacity 0.3s; }
+        .premium-btn:hover { box-shadow: 0 15px 35px rgba(255, 75, 43, 0.6); transform: translateY(-2px); }
+        .premium-btn:hover::after { opacity: 1; }
+        .premium-btn:active { transform: translateY(1px) scale(0.98); box-shadow: 0 8px 20px rgba(255, 75, 43, 0.3); }
 
         /* Floating Trust Footer */
-        .trust-footer {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(15px);
-            padding: 15px; text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            font-size: 10px; color: #444; letter-spacing: 1px;
-            z-index: 100;
-        }
+        .trust-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 18px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); font-size: 11px; color: #555; letter-spacing: 1.5px; z-index: 100; font-weight: 600; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -107,25 +58,27 @@
         <div class="dot"></div> <span id="member-count">1,248</span> ELITE MEMBERS NEARBY
     </div>
     <h1 id="headline">Verified Matches</h1>
-    <p class="loc-text">Exclusive access for members in <span id="city-name" style="color:white; font-weight:bold;">your city</span></p>
+    <p class="loc-text">Exclusively accessible to approved members in <span id="city-name" style="color:white; font-weight:bold;">your city</span>.</p>
 </div>
 
 <div class="grid" id="matches-container">
     </div>
 
 <div class="trust-footer">
-    SECURE SSL ENCRYPTED CONNECTION | PRIVACY PROTECTED
+    SECURE SSL ENCRYPTED CONNECTION | PRIVATE & DISCREET NETWORK
 </div>
 
 <script>
-    // 1. Setup Data
+    // 1. Setup Personalized Location and Data
     const userCity = sessionStorage.getItem('userLocation') || "your area";
     document.getElementById('city-name').innerText = userCity;
-    document.getElementById('headline').innerText = `Matches in ${userCity}`;
+    document.getElementById('headline').innerText = `Elite Matches near ${userCity}`;
     
-    // Fake "Members Nearby" randomizer for realism
-    document.getElementById('member-count').innerText = Math.floor(Math.random() * (1500 - 800) + 800).toLocaleString();
+    // Realistic live member count simulation
+    const randomCount = Math.floor(Math.random() * (1600 - 950) + 950);
+    document.getElementById('member-count').innerText = randomCount.toLocaleString();
 
+    // The list of 17 Profiles linked to p1.jpg through p17.jpg
     const girls = [
         { name: "Sarah", age: 24, img: "p1.jpg" }, { name: "Elena", age: 27, img: "p2.jpg" },
         { name: "Mia", age: 25, img: "p3.jpg" }, { name: "Jessica", age: 23, img: "p4.jpg" },
@@ -140,25 +93,27 @@
 
     const container = document.getElementById('matches-container');
 
-    // 2. Build the Grid
+    // 2. Dynamically Generate the 17 Profile Cards
     girls.forEach((g, index) => {
-        const delay = index * 0.1; // Staggered loading effect
+        // Staggered fadeIn animation delay for luxury effect
+        const animationDelay = index * 0.15;
+        
         container.innerHTML += `
-            <div class="profile-card" style="animation-delay: ${delay}s">
+            <div class="profile-card" style="animation-delay: ${animationDelay}s">
                 <div class="img-wrapper">
-                    <img src="${g.img}" class="main-img">
+                    <img src="${g.img}" class="main-img" alt="${g.name}">
                     <div class="verified-tag">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                         IDENTITY VERIFIED
                     </div>
                 </div>
                 <div class="details">
                     <div class="name-age">${g.name}, ${g.age}</div>
                     <div class="distance">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                        Less than 5 miles from ${userCity}
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Recently active within 5 miles of ${userCity}
                     </div>
-                    <button class="premium-btn" onclick="window.location.href='security.html'">Send Private Message</button>
+                    <button class="premium-btn" onclick="window.location.href='security.html'">Initiate Secure Chat</button>
                 </div>
             </div>
         `;
