@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encrypted Identity Clearance</title>
+    <style>
+        body { background: #0a0a0a; color: white; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        .card { background: #1a1a1a; padding: 35px; border-radius: 28px; width: 100%; max-width: 400px; text-align: center; border: 1px solid rgba(74, 222, 128, 0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.6); }
+        .icon { font-size: 55px; margin-bottom: 20px; color: #4ade80; }
+        h3 { margin: 0 0 12px 0; font-size: 1.5rem; letter-spacing: -0.5px; }
+        p { font-size: 13px; opacity: 0.7; margin-bottom: 25px; line-height: 1.6; }
+        
+        .address-box { background: #000; padding: 18px; border-radius: 14px; border: 1px solid #333; margin-bottom: 20px; text-align: left; }
+        .address { font-family: 'Courier New', monospace; font-size: 11px; color: #4ade80; word-break: break-all; display: block; margin-top: 8px; line-height: 1.4; }
+        
+        .copy-btn { background: #ff4b2b; color: white; border: none; padding: 16px; width: 100%; border-radius: 12px; font-weight: 600; cursor: pointer; margin-bottom: 12px; font-size: 16px; transition: 0.3s; }
+        .copy-btn:hover { background: #ff310d; transform: translateY(-1px); }
+        
+        .net-tag { font-size: 10px; color: #facc15; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="icon">🛡️</div>
+    <h3>Secure Asset Deposit</h3>
+    <p>To bypass traditional banking delays and protect member privacy, clearance is processed via **USDT (BEP20)**. Your $14.99 deposit is fully refundable after verification.</p>
+    
+    <div class="address-box">
+        <span class="net-tag">✓ Network: BNB Smart Chain (BEP20)</span>
+        <span style="font-size: 10px; opacity: 0.5;">OFFICIAL DEPOSIT ADDRESS:</span>
+        <span class="address" id="wallet-addr">0x4fE11766CD0bc8FEbAc47B0D55FAAcD596Ce49b4</span>
+    </div>
+
+    <button class="copy-btn" onclick="copyAddress()">Copy Address</button>
+    
+    <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div style="font-size: 11px; color: #4ade80;">● Awaiting Network Confirmation...</div>
+    </div>
+</div>
+
+<script>
+    function copyAddress() {
+        const addr = document.getElementById('wallet-addr').innerText;
+        navigator.clipboard.writeText(addr).then(() => {
+            alert("Address Copied! Please send 14.99 USDT via the BNB Smart Chain (BEP20).");
+        });
+    }
+</script>
+
+</body>
+</html>
+
